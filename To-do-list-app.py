@@ -1,5 +1,7 @@
 #To-do list app by Virginia Herrero
 
+from datetime import datetime
+
 #Define task class
 class Task:
     #Define instance attributes
@@ -18,57 +20,53 @@ class Task:
     def change_status(self):
         self.completed = True
 
-#Initialize the tasks list
-tasks = []
-
-#Implement app functions
-#Add a new task
-def add_task():
-    name = input("Enter task name: ")
-    due_date = input("Enter due date (dd/mm/yyyy): ")
-    due_date = datetime.strptime(due_date, "%d/%m/%Y")
-    new_task = Task(name, due_date)
-    tasks.append(new_task)
-    print(f"The task {new_task.name} was added to the to-do list!")
-
-#Edit task
-def edit_task():
-    task_to_edit = input("Enter the name of the tast to edit: ")
-    for task in tasks:
-        if task.name == task_to_edit:
-            print("Editing options: 1.Change name, 2.Change due date")
-            edit = int(input("Choose an option: "))
-            if edit == 1:
-                edited_name = input("Enter new name: ")
-                task.change_name(edited_name)
-                print(f"Task name was changed to {task.edited_name}")
-                
-            elif edit == 2:
-                edited_date = input("Enter new due date: ")
-                task.change_due_date(edited_date)
-                print(f"Due date was changed to {task.due_date} for the task {task.name}")
-                
-            else:
-                print("Please, enter a correct option")
-        else:
-            print(f"The task {task.name} was not found")
-
-#Mark task as completed
-def complete_task():
-    completed_task = input("Enter the name of the completed task: ")
-    for task in tasks:
-        if task.name == completed_task:
-            task.change_status()
-            print(f"Task {task.name} was marked as completed")
-        else:
-            print(f"The task {task.name} was not found")
+#Define ToDoList class
+class ToDoList:
+    #Define class instance attributes
+    def __init__(self):
+        self.tasks = []
     
-#Delete task
-def delete_task():
-    task_to_delete = input("Enter the name of the task to delete: ")
-    for task in tasks:
-        if task.name == task_to_delete:
-            tasks.remove(task)
-            print(f"Task {task.name} was deleted")
-        else:
-            print(f"The task {task.name} was not found")
+    #Define class methods which are the app functions
+    #Add a new task
+    def add_task(self, task):
+        self.tasks.append(task)
+        print(f"The task {task.name} was added to the to-do list!")
+
+    #Edit task
+    def edit_task(self, task_name):
+        for i in self.tasks:
+            if i.name == task_name:
+                print("Editing options: 1.Change name, 2.Change due date")
+                edit = int(input("Choose an option: "))
+                if edit == 1:
+                    edited_name = input("Enter new name: ")
+                    i.change_name(edited_name)
+                    print(f"Task name was changed to {i.name} \n")
+                    
+                elif edit == 2:
+                    edited_date = input("Enter new due date: ")
+                    i.change_due_date(edited_date)
+                    print(f"Due date was changed to {i.due_date} for the task {i.name}")
+                    
+                else:
+                    print("Please, enter a correct option")
+            else:
+                print(f"The task {i.name} was not found")
+
+    #Mark task as completed
+    def complete_task(self, task_name):
+        for i in self.tasks:
+            if i.name == task_name:
+                i.change_status()
+                print(f"Task {i.name} was marked as completed")
+            else:
+                print(f"The task {i.name} was not found")
+       
+    #Delete task
+    def delete_task(self, task):
+        for i in self.tasks:
+            if i.name == task:
+                self.tasks.remove(i)
+                print(f"Task {i.name} was deleted")
+            else:
+                print(f"The task {i.name} was not found")
