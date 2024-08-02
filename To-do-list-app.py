@@ -70,3 +70,19 @@ class ToDoList:
                 print(f"Task {i.name} was deleted")
             else:
                 print(f"The task {i.name} was not found")
+
+#Display app menu
+def display_menu():
+    #App Menu
+    menu = {
+        1: "Add New Task",
+        2: "Edit Task",
+        3: "Mark Task as Completed",
+        4: "Delete Task"
+    }
+    print("---------------")
+    print("To-Do List Menu")
+    print("---------------")
+    for key, value in menu.items():
+        print(f'{key} - {value}')
+    print("---------------")
