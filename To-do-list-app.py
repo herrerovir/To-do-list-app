@@ -33,9 +33,9 @@ class ToDoList:
         print(f"The task {task.name} was added to the to-do list!")
 
     #Edit task
-    def edit_task(self, task_name):
+    def edit_task(self, task):
         for i in self.tasks:
-            if i.name == task_name:
+            if i.name == task:
                 print("Editing options: 1.Change name, 2.Change due date")
                 edit = int(input("Choose an option: "))
                 if edit == 1:
@@ -54,9 +54,9 @@ class ToDoList:
                 print(f"The task {i.name} was not found")
 
     #Mark task as completed
-    def complete_task(self, task_name):
+    def complete_task(self, task):
         for i in self.tasks:
-            if i.name == task_name:
+            if i.name == task:
                 i.change_status()
                 print(f"Task {i.name} was marked as completed")
             else:
