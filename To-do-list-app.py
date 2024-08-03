@@ -33,25 +33,36 @@ class ToDoList:
         print(f"The task {task.name} was added to the to-do list!")
 
     #Edit task
-    def edit_task(self, task):
+    def edit_task(self, task_name_to_edit):
         for i in self.tasks:
-            if i.name == task:
-                print("Editing options: 1.Change name, 2.Change due date")
+            if i.name == task_name_to_edit:
+                print("Editing options: 1 - Change name, 2 - Change due date")
                 edit = int(input("Choose an option: "))
-                if edit == 1:
-                    edited_name = input("Enter new name: ")
+                if edit == 1: #change name
+                    edited_name = input("Enter new task name: ").lower()
+                    for j in self.tasks:
+                        while j.name == edited_name:
+                            print(f"{edited_name} is already used. Please, choose another name")
+                            edited_name = input("Enter new task name: ").lower()
                     i.change_name(edited_name)
                     print(f"Task name was changed to {i.name} \n")
                     
-                elif edit == 2:
-                    edited_date = input("Enter new due date: ")
+                elif edit == 2: #change due date
+                    while True:
+                        edited_date = input("Enter new due date (dd/mm/yyyy): ")
+                        try:
+                            edited_date = datetime.strptime(edited_date, "%d/%m/%Y")
+                        except ValueError:
+                            print("Invalid date format. Please enter date as dd/mm/yyyy")
+                        else:
+                            break
                     i.change_due_date(edited_date)
-                    print(f"Due date was changed to {i.due_date} for the task {i.name}")
+                    print(f"Due date was changed to {i.due_date} for the task {i.name} \n")
                     
                 else:
-                    print("Please, enter a correct option")
+                    print("Please, enter a correct option \n")
             else:
-                print(f"The task {i.name} was not found")
+                print(f"The task {i.name} was not found \n")
 
     #Mark task as completed
     def complete_task(self, task):
@@ -86,3 +97,4 @@ def display_menu():
     for key, value in menu.items():
         print(f'{key} - {value}')
     print("---------------")
+
