@@ -65,22 +65,22 @@ class ToDoList:
                 print(f"The task {i.name} was not found \n")
 
     #Mark task as completed
-    def complete_task(self, task):
+    def complete_task(self, task_name_to_complete):
         for i in self.tasks:
-            if i.name == task:
+            if i.name == task_name_to_complete:
                 i.change_status()
-                print(f"Task {i.name} was marked as completed")
+                print(f"Task {i.name} was marked as completed \n")
             else:
-                print(f"The task {i.name} was not found")
+                print(f"The task {i.name} was not found \n")
        
     #Delete task
-    def delete_task(self, task):
+    def delete_task(self, task_name_to_delete):
         for i in self.tasks:
-            if i.name == task:
+            if i.name == task_name_to_delete:
                 self.tasks.remove(i)
-                print(f"Task {i.name} was deleted")
+                print(f"Task {i.name} was deleted \n")
             else:
-                print(f"The task {i.name} was not found")
+                print(f"The task {i.name} was not found \n")
 
 #Display app menu
 def display_menu():
@@ -98,3 +98,49 @@ def display_menu():
         print(f'{key} - {value}')
     print("---------------")
 
+#Main app loop
+def main():
+    my_todo_list = ToDoList()
+    display_menu()
+    while True:
+        choice = input("What would you like to do? Please, choose an option: \n")
+
+        if choice == "1": #Add new task: name and due date
+            name = input("Enter task name: ").lower()
+            for i in my_todo_list.tasks:
+                while i.name == name:
+                    print(f"{name} is already used. Please, choose another name")
+                    name = input("Enter task name: ")
+
+            while True:
+                due_date = input("Enter due date (dd/mm/yyyy): ")
+                try:
+                    due_date = datetime.strptime(due_date, "%d/%m/%Y")
+                except ValueError:
+                    print("Invalid date format. Please enter date as dd/mm/yyyy")
+                else:
+                    break
+
+            task = Task(name, due_date)
+            my_todo_list.add_task(task)
+
+        elif choice == "2": #Edit task
+            task_name_to_edit = input("Enter task to edit: ").lower()
+            my_todo_list.edit_task(task_name_to_edit)
+
+        elif choice == "3": #Mark task as completed
+            task_name_to_complete = input("Enter task to mark as completed: ").lower()
+            my_todo_list.complete_task(task_name_to_complete)
+
+        elif choice == "4": #Delete task
+            task_name_to_delete = input("Enter task to delete: ").lower()
+            my_todo_list.delete_task(task_name_to_delete)
+
+        else:
+            break
+        
+        input("Press enter to go back to menu: ")
+        display_menu()
+
+if __name__ == "__main__":
+    main()
