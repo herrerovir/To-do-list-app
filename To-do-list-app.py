@@ -108,7 +108,6 @@ class ToDoList:
                         print(f"{index}. {task.name} \n")
 
 
-
 #Display app menu
 def display_menu():
     #App Menu
@@ -116,7 +115,11 @@ def display_menu():
         1: "Add New Task",
         2: "Edit Task",
         3: "Mark Task as Completed",
-        4: "Delete Task"
+        4: "Delete Task",
+        5: "Show All Tasks",
+        6: "Show Completed Tasks",
+        7: "Show Today's Tasks",
+        8: "Quit To-do List"
     }
     print("---------------")
     print("To-Do List Menu")
@@ -163,8 +166,21 @@ def main():
             task_name_to_delete = input("Enter task to delete: ").lower()
             my_todo_list.delete_task(task_name_to_delete)
 
-        else:
+        elif choice == "5": #Show all task
+            my_todo_list.show_all_task()
+
+        elif choice == "6": #Show completed tasks
+            my_todo_list.show_completed_tasks()
+
+        elif choice == "7": #Show todays tasks
+            my_todo_list.show_todays_tasks()
+
+        elif choice == "8":
+            print("Your tasks were saved and your to-do list was closed!")
             break
+        
+        else:
+            print("Invalid input")
         
         input("Press enter to go back to menu: ")
         display_menu()
