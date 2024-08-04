@@ -20,6 +20,7 @@ class Task:
     def change_status(self):
         self.completed = True
 
+
 #Define ToDoList class
 class ToDoList:
     #Define class instance attributes
@@ -81,6 +82,25 @@ class ToDoList:
                 print(f"Task {i.name} was deleted \n")
             else:
                 print(f"The task {i.name} was not found \n")
+    
+    def show_all_task(self):
+        if self.tasks:
+            print("All tasks in your to-do list: ")
+            for index, task in enumerate(self.tasks, start = 1):
+                print(f"{index}. {task.name}, due to {task.due_date} \n")
+        else:
+            print("Your to-do list is empty \n")
+
+    def show_completed_tasks(self):
+        if self.tasks:
+            print("Completed tasks on your to-do list: ")
+            for index, task in enumerate(self.tasks, start = 1):
+                if task.completed == True:
+                    print(f"{index}. {task.name} \n")
+        else:
+            print("No completed tasks were found in your to-do list \n")
+
+
 
 #Display app menu
 def display_menu():
