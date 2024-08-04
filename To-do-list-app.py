@@ -1,6 +1,6 @@
 #To-do list app by Virginia Herrero
-
-from datetime import datetime
+import datetime
+from datetime import date
 
 #Define task class
 class Task:
@@ -52,7 +52,7 @@ class ToDoList:
                     while True:
                         edited_date = input("Enter new due date (dd/mm/yyyy): ")
                         try:
-                            edited_date = datetime.strptime(edited_date, "%d/%m/%Y")
+                            edited_date = datetime.datetime.strptime(edited_date, "%d/%m/%Y").date()
                         except ValueError:
                             print("Invalid date format. Please enter date as dd/mm/yyyy")
                         else:
@@ -100,6 +100,13 @@ class ToDoList:
         else:
             print("No completed tasks were found in your to-do list \n")
 
+    def show_todays_tasks(self):
+        if self.tasks:
+            print("Tasks due to today: ")
+            for index, task in enumerate(self.tasks, start = 1):
+                if task.due_date == date.today():
+                        print(f"{index}. {task.name} \n")
+
 
 
 #Display app menu
@@ -135,7 +142,7 @@ def main():
             while True:
                 due_date = input("Enter due date (dd/mm/yyyy): ")
                 try:
-                    due_date = datetime.strptime(due_date, "%d/%m/%Y")
+                    due_date = datetime.datetime.strptime(due_date, "%d/%m/%Y").date()
                 except ValueError:
                     print("Invalid date format. Please enter date as dd/mm/yyyy")
                 else:
