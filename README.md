@@ -1,5 +1,6 @@
 # A basic but effective task manager
-![GitHub top language](https://img.shields.io/github/languages/top/herrerovir/To-do-list-app) ![GitHub License](https://img.shields.io/github/license/herrerovir/To-do-list-app)
+![GitHub top language](https://img.shields.io/github/languages/top/herrerovir/To-do-list-app) ![GitHub License](https://img.shields.io/github/license/herrerovir/to-do-list-app)
+
 
 Life is easier when everything is well organized. 
 
